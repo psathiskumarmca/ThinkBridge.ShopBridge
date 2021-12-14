@@ -1,0 +1,38 @@
+﻿@model ThinkBridge.ShopBridge.Model.ProductModel
+
+@{
+    ViewBag.Title = "Add/Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm("AddorEdit", "Product", FormMethod.Post, new { id = "AddEdit", autocomplete = "off", autocapitalize = "none", }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.ProductId)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price)
+            @Html.EditorFor(m => m.Price)
+            @Html.ValidationMessageFor(m => m.Price)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            <input type="reset" value="Reset" class="btn btn-secondary" />
+        </div>
+    }
+</div>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ThinkBridge.ShopBridge.Model.ProductModel>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product List</h2>
+
+<p>
+    <a href="@Url.Action("AddorEdit","Product")" class="btn btn-primary" title="Add new">Add New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a href="@Url.Action("AddorEdit","Product", new { id = item.ProductId })" class="btn btn-default" title="Add new">Edit</a>
+                <a onclick="DeleteConfirm(@item.ProductId)" class="btn btn-default" title="Delete">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        // Show success message after Add/Edit
+        $(function () {
+            var successMessage = '@TempData["SuccessMsg"]';
+            if (successMessage != '')
+                alert(successMessage);
+        })
+
+        // Show delete confirm popup
+        function DeleteConfirm(id) {
+            var prodId = '/Product/Delete/' + id;
+            if (confirm('Are your sure to delete this record ?'))
+                window.location.href = prodId;
+        }
+    </script>
+}

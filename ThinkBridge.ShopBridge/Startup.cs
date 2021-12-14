@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ThinkBridge.ShopBridge.Admin.UI.Helper;
 
 namespace ThinkBridge.ShopBridge
 {
@@ -22,6 +23,8 @@ namespace ThinkBridge.ShopBridge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IWebClient, WebClient>();
+
             services.AddControllersWithViews();
         }
 
